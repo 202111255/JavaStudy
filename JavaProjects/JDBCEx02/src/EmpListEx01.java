@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class quiz01 {
+public class EmpListEx01 {
     public static void main(String[] args) {
         System.out.println("시작");
 
@@ -32,7 +32,7 @@ public class quiz01 {
                 System.out.print(rs.getString("empno") + "\t");
                 System.out.print(rs.getString("ename") + "\t");
                 System.out.print(rs.getString("sal") + "\t");
-                System.out.println(rs.getString("annsal"));
+                System.out.println(rs.getString(4));
             }
 
 

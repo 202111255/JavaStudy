@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class EmpListEx01 {
+public class EmpListEx02 {
     public static void main(String[] args) {
         System.out.println("시작");
 
@@ -22,7 +22,7 @@ public class EmpListEx01 {
 
             stmt = conn.createStatement();
 
-            String sql = "select empno, ename, sal, sal*12+ifnull(comm, 0) as annsal from emp where deptno = 10";
+            String sql = "select empno, ename, sal, date_format(hiredate, '%Y/%m/%d') from emp where deptno = 10";
 
             rs = stmt.executeQuery(sql);
 
