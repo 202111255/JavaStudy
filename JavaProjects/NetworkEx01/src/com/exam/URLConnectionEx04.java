@@ -1,37 +1,33 @@
 package com.exam;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class URLConnectionEx03 {
+public class URLConnectionEx04 {
     public static void main(String[] args) {
 
-        BufferedInputStream bis = null;
-        BufferedOutputStream bos = null;
+        BufferedReader br = null;
 
         try {
-            URLConnection conn = new URL( "https://t1.daumcdn.net/news/202411/01/kppa/20241101131019918qtps.jpg" ).openConnection();
+            URLConnection conn = new URL( "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.xml?key=fd7566d03ea3d24d7da49858bfab44af&targetDt=20241026\n" ).openConnection();
 
-            // 읽어 올 이미지
-            bis = new BufferedInputStream( conn.getInputStream() );
-            // 저장 이미지
-            bos = new BufferedOutputStream( new FileOutputStream( "./gallery.jpg" ) );
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
-            int data = 0;
-            while( ( data = bis.read() ) != -1 ) {
-                bos.write( data );
+            String line = br.readLine().replaceAll("><", ">\n<");
+            //System.out.println(line);
+
+            String[] lines = line.split("\n");
+            for (String data : lines) {
+                if (data.trim().startsWith("<movieNm" +
+                        ">")) {
+                    System.out.println(data.trim());
+                }
             }
-
-            System.out.println( "저장 완료" );
         } catch (IOException e) {
             System.out.println( "[에러] " + e.getMessage() );
         } finally {
-            if ( bis != null ) { try { bis.close(); } catch (IOException e) {} }
-            if ( bos != null ) { try { bos.close(); } catch (IOException e) {} }
+            if ( br != null ) { try { br.close(); } catch (IOException e) {} }
         }
     }
 }

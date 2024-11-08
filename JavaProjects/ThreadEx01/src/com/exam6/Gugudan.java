@@ -1,4 +1,4 @@
-package com.exam5;
+package com.exam6;
 
 public class Gugudan extends Thread{
     private int dan;
