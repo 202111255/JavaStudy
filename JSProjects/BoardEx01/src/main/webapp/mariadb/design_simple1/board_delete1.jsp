@@ -1,5 +1,66 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
+
+<%@ page import="javax.sql.DataSource" %>
+
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.naming.NamingException" %>
+
+<%
+	//seq 가져오기
+	String seq = request.getParameter("seq");
+
+
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
+	String subject = "";
+	String writer = "";
+
+
+	try {
+
+		Context initCtx = new InitialContext();
+		Context envCtx = (Context) initCtx.lookup("java:comp/env");
+		DataSource dataSource = (DataSource) envCtx.lookup("jdbc/mariadb1");
+
+
+		conn = dataSource.getConnection();
+
+		//절대 비밀번호를 같이 가져오면 안됨
+		String sql = "select subject, writer from board1 where seq = ? order by seq desc";
+
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, seq);
+
+		rs = pstmt.executeQuery();
+
+		//하나만 가져오면 되니까 if 걸어주기
+		if(rs.next()) {
+			subject = rs.getString("subject");
+			writer = rs.getString("writer");
+		}
+
+
+	} catch (SQLException e) {
+		System.out.println("에러 :"+ e.getMessage());
+	} catch (NamingException e) {
+		System.out.println("에러 :"+ e.getMessage());
+	}
+	finally {
+		if (pstmt != null) { pstmt.close(); }
+		if (conn != null) { conn.close(); }
+		if (rs != null) { rs.close(); }
+	}
+
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,6 +69,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../../css/board.css">
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById('dbtn').onclick = function () {
+			if (document.dfrm.password.value == "") {
+				alert('비밀번호를 입력하셔야 합니다.');
+				return false;
+			}
+			document.dfrm.submit();
+		}
+	}
+</script>
+
 </head>
 
 <body>
@@ -17,18 +90,19 @@
 	<p>HOME &gt; 게시판 &gt; <strong>게시판</strong></p>
 </div>
 <div class="con_txt">
-	<form action="" method="post" name="">
-		<div class="contents_sub">	
+	<form action="board_delete1_ok.jsp" method="post" name="dfrm">
+		<input type="hidden" name="seq" value="<%=seq%>"/>
+		<div class="contents_sub">
 			<!--게시판-->
 			<div class="board_write">
 				<table>
 				<tr>
 					<th class="top">글쓴이</th>
-					<td class="top"><input type="text" name="writer" value="" class="board_view_input_mail" maxlength="5" readonly/></td>
+					<td class="top"><input type="text" name="writer" value=<%=writer%> class="board_view_input_mail" maxlength="5" readonly/></td>
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td><input type="text" name="subject" value="" class="board_view_input" readonly/></td>
+					<td><input type="text" name="subject" value=<%=subject%> class="board_view_input" readonly/></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
@@ -36,14 +110,14 @@
 				</tr>
 				</table>
 			</div>
-			
+
 			<div class="btn_area">
 				<div class="align_left">
 					<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_list1.jsp'" />
 					<input type="button" value="보기" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_view1.jsp'" />
 				</div>
 				<div class="align_right">
-					<input type="button" value="삭제" class="btn_write btn_txt01" style="cursor: pointer;" />
+					<input type="button" id="dbtn" value="삭제" class="btn_write btn_txt01" style="cursor: pointer;" />
 				</div>
 			</div>
 			<!--//게시판-->

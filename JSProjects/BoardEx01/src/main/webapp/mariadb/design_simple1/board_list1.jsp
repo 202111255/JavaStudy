@@ -1,5 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ page import="javax.sql.DataSource" %>
+
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.naming.NamingException" %>
+
+<%
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
+	StringBuilder sbHtml = new StringBuilder();
+
+	try {
+
+		Context initCtx = new InitialContext();
+		Context envCtx = (Context) initCtx.lookup("java:comp/env");
+		DataSource dataSource = (DataSource) envCtx.lookup("jdbc/mariadb1");
+
+
+		conn = dataSource.getConnection();
+
+		//절대 비밀번호를 같이 가져오면 안됨
+		String sql = "select seq, subject, writer, wdate, hit from board1 order by seq desc";
+
+		pstmt = conn.prepareStatement(sql);
+
+		rs = pstmt.executeQuery();
+
+		while(rs.next()) {
+			String seq = rs.getString("seq");
+			String subject = rs.getString("subject");
+			String writer = rs.getString("writer");
+			String wdate = rs.getString("wdate").replaceAll("-", "/");;
+			String hit = rs.getString("hit");
+
+			//System.out.println(subject);
+			sbHtml.append("<tr>");
+			sbHtml.append("<td>&nbsp;</td>");
+			sbHtml.append("<td>" + seq + "</td>");
+			sbHtml.append("<td class='left'><a href='board_view1.jsp?seq="+seq+"'>" + subject + "</a>&nbsp;<img src='../../images/icon_new.gif' alt='NEW'></td>");
+			sbHtml.append("<td>" + writer + "</td>");
+			sbHtml.append("<td>" + wdate + "</td>");
+			sbHtml.append("<td>" + hit + "</td>");
+			sbHtml.append("<td>&nbsp;</td>");
+			sbHtml.append("</tr>");
+		}
+
+
+	} catch (SQLException e) {
+		System.out.println("에러 :"+ e.getMessage());
+	} catch (NamingException e) {
+		System.out.println("에러 :"+ e.getMessage());
+	}
+	finally {
+		if (pstmt != null) { pstmt.close(); }
+		if (conn != null) { conn.close(); }
+		if (rs != null) { rs.close(); }
+	}
+
+%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -34,24 +102,16 @@
 				<th width="5%">조회</th>
 				<th width="3%">&nbsp;</th>
 			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>1</td>
-				<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="../../images/icon_new.gif" alt="NEW"></td>
-				<td>asdfa</td>
-				<td>2017-01-31</td>
-				<td>6</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>1</td>
-				<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="../../images/icon_new.gif" alt="NEW"></td>
-				<td>asdfa</td>
-				<td>2017-01-31</td>
-				<td>6</td>
-				<td>&nbsp;</td>
-			</tr>
+<%--			<tr>--%>
+<%--				<td>&nbsp;</td>--%>
+<%--				<td>1</td>--%>
+<%--				<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="../../images/icon_new.gif" alt="NEW"></td>--%>
+<%--				<td>asdfa</td>--%>
+<%--				<td>2017-01-31</td>--%>
+<%--				<td>6</td>--%>
+<%--				<td>&nbsp;</td>--%>
+<%--			</tr>--%>
+				<%=sbHtml.toString()%>
 			</table>
 		</div>	
 
