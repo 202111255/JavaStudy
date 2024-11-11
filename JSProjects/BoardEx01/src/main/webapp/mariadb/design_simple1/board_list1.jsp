@@ -27,6 +27,7 @@
 
 		conn = dataSource.getConnection();
 
+
 		//절대 비밀번호를 같이 가져오면 안됨
 		String sql = "select seq, subject, writer, wdate, hit from board1 order by seq desc";
 

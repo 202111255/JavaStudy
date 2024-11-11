@@ -1,0 +1,75 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: kbd11
+  Date: 2024-11-08
+  Time: 오후 3:14
+  To change this template use File | Settings | File Templates.
+--%>
+<%@include file="import.jsp"%>
+
+
+<%
+    String subject = request.getParameter("subject");
+    String writer = request.getParameter("writer");
+    String mail = request.getParameter( "mail1" ) + "@" + request.getParameter( "mail2" );
+    String password = request.getParameter("password");
+    String content = request.getParameter("content");
+
+    //ip 받아오기
+    String wip = request.getRemoteAddr();
+
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    int flag = 1;
+
+    try {
+
+        Context initCtx = new InitialContext();
+        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+        DataSource dataSource = (DataSource) envCtx.lookup("jdbc/mariadb1");
+
+
+        conn = dataSource.getConnection();
+        String sql = "insert into board1 values (0, ?, ?, ?, password(?), ?, 0, ?, now())";
+
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, subject);
+        pstmt.setString(2, writer);
+        pstmt.setString(3, mail);
+        pstmt.setString(4, password);
+        pstmt.setString(5, content);
+        pstmt.setString(6, wip);
+
+        int result = pstmt.executeUpdate();
+        if ( result == 1 ) {
+            // 정상
+            flag = 0;
+        }
+
+        out.println("입력 완료");
+    } catch (SQLException e) {
+        System.out.println("에러 :"+ e.getMessage());
+    } catch (NamingException e) {
+        System.out.println("에러 :"+ e.getMessage());
+    }
+    finally {
+        if (pstmt != null) { pstmt.close(); }
+        if (conn != null) { conn.close(); }
+    }
+
+
+    // 에러 중심의 후처리 = 자바스크립트 중심으로 처리
+
+    out.println( "<script type='text/javascript'>" );
+    if ( flag == 0 ) {
+        // 정상
+        out.println( "alert( '글쓰기 성공' );" );
+        out.println( "location.href='./board_list1.jsp';" );
+    } else {
+        // 비정상
+        out.println( "alert( '글쓰기 실패' );" );
+        out.println( "history.back();" );
+    }
+    out.println( "</script>" );
+%>
+

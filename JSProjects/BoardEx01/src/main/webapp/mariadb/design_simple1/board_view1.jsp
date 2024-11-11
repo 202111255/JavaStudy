@@ -38,8 +38,16 @@
 
 		conn = dataSource.getConnection();
 
+		//조회수 증가
+		String sql = "update board1 set hit = hit+1 where seq=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, seq);
+
+		pstmt.executeUpdate();
+
+
 		//절대 비밀번호를 같이 가져오면 안됨
-		String sql = "select subject, writer, mail, wip, wdate, hit, content from board1 where seq = ? order by seq desc";
+		sql = "select subject, writer, mail, wip, wdate, hit, content from board1 where seq = ? order by seq desc";
 
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, seq);
