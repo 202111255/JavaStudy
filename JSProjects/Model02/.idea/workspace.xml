@@ -5,30 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfd479ce-9878-415d-ad37-b4550f32b5bf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ControllerEx01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/View1Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/View2Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/view1.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/view2.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Model2/src/main/java/org/example/controller/ControllerEx01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Model3/src/main/java/org/example/controller/ControllerEx01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Model3/src/main/java/org/example/model2/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Model3/src/main/java/org/example/model2/FormAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Model3/src/main/java/org/example/model2/FormOkAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Model3/src/main/webapp/WEB-INF/views/form.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Model3/src/main/webapp/WEB-INF/views/form_ok.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx01/src/main/java/org/example/servlet/ServletEx01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx01/src/main/java/org/example/servlet/ServletEx02.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx01/src/main/java/org/example/servlet/ServletEx03.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx01/src/main/webapp/form.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx02/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx02/.idea/git_toolbox_blame.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx02/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx02/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx02/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx02/src/main/java/org/example/servlet/GugudanOkServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ServletEx02/src/main/java/org/example/servlet/GugudanServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelEx03/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelEx03/.idea/git_toolbox_blame.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelEx03/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelEx03/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelEx03/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelEx03/src/main/java/org/example/controller/BoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelEx03/src/main/webapp/WEB-INF/views/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ServletEx03/src/main/java/org/example/controller/ControllerServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ServletEx03/src/main/webapp/WEB-INF/views/view1.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ServletEx03/src/main/webapp/WEB-INF/views/view2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BoardEx02/.idea/dataSources/103f73ba-9b11-44ed-bd3a-01c90ba9888a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BoardEx02/.idea/dataSources/103f73ba-9b11-44ed-bd3a-01c90ba9888a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +40,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -62,30 +50,30 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2olwMe7sdZo38i82JQYDSzH1o5Z" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build Model02.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Tomcat Server.Tomcat 10.1.31.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build Model02.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 10.1.31.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Java\JSProjects\Model02\src\main\webapp\WEB-INF\views" />
@@ -147,6 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731457426958</updated>
       <workItem from="1731457429206" duration="3336000" />
+      <workItem from="1731485553605" duration="2918000" />
     </task>
     <servers />
   </component>

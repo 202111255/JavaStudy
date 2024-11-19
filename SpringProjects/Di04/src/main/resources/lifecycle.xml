@@ -3,17 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="mapTO" class="org.example.di05.BoardMapTO">
-        <property name="userMaps">
-            <map>
-                <entry key="1">
-                    <value>제목 1</value>
-                </entry>
-                <entry key="2">
-                    <value>제목 2</value>
-                </entry>
-            </map>
+    <bean id="writeAction" class="org.example.lifecycle.WriteAction" init-method="init_method" destroy-method="destroy_method">
+        <property name="writer">
+            <value>홍길동</value>
         </property>
     </bean>
+
+    <bean class="org.example.lifecycle.CustomBeanPostProcessor"/>
 
 </beans>

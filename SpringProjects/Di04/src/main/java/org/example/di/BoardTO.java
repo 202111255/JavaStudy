@@ -1,4 +1,4 @@
-package org.example.di04;
+package org.example.di;
 
 public class BoardTO {
     public BoardTO() {

@@ -1,2 +1,11 @@
-package org.example.di02;public class BoardTO {
+package org.example.di02;
+
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@ToString
+public class BoardTO {
+    private int seq;
+    private String subject;
 }

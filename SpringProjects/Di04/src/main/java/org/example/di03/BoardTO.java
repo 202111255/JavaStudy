@@ -1,4 +1,4 @@
-package org.example.di02;
+package org.example.di03;
 
 import lombok.Setter;
 import lombok.ToString;

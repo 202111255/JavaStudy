@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: boot02
+
+my:
+  name: tester
+  fullname: ${my.name} lecture
+  secret: ${random.value}
+
+logging:
+  level:
+    root: debug

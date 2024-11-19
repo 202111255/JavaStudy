@@ -3,4 +3,24 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<!--    <bean id = "to" class="org.example.di.BoardTO"/>-->
+<!--    <bean id = "action" class="org.example.di.WriteAction">-->
+<!--        <constructor-arg>-->
+<!--            <ref bean="to"/>-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+<!--    <bean id = "to" class="org.example.di02.BoardTO">-->
+<!--        <property name="seq" value="10"/>-->
+<!--        <property name="subject" value="제목"/>-->
+<!--    </bean>-->
+
+    <bean id = "to" class="org.example.di03.BoardTO">
+        <property name="seq" value="10"/>
+        <property name="subject" value="제목"/>
+    </bean>
+    <bean id = "action" class="org.example.di03.WriteAction">
+        <property name="to" ref="to"/>
+    </bean>
+
+
 </beans>

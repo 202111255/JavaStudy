@@ -1,7 +1,5 @@
-package org.example.di02;
+package org.example.di03;
 
-import org.example.di02.BoardTO;
-import org.example.di.WriteAction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -13,14 +11,14 @@ public class Di04Application {
         SpringApplication.run(Di04Application.class, args);
 
 //        BoardTO to = new BoardTO();
-//        to.setSeq(10);
+//        to.setSeq(1);
 //        to.setSubject("제목");
-
+//        WriteAction action = new WriteAction();
+//        action.setTo(to);
+//        action.execute();
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:context.xml");
-        BoardTO to = (BoardTO)ctx.getBean("to");
-
-        System.out.println("to : " + to);
-
+        WriteAction action = (WriteAction) ctx.getBean("action");
+        action.execute();
 
     }
 

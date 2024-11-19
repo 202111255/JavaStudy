@@ -1,10 +1,12 @@
-package org.example.di04;
+package org.example.di05;
 
+import org.example.di04.BoardListTO;
+import org.example.di04.BoardTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 @SpringBootApplication
 public class Di04Application {
@@ -13,34 +15,23 @@ public class Di04Application {
         SpringApplication.run(Di04Application.class, args);
 
         /*
-        BoardTO to1 = new BoardTO();
-        to1.setSeq(1);
-        to1.setSubject("제목 1");
+        HashMap<String, String> userMaps = new HashMap<>();
+        userMaps.put("1", "제목1");
+        userMaps.put("2", "제목2");
 
-        BoardTO to2 = new BoardTO();
-        to1.setSeq(2);
-        to1.setSubject("제목 2");
+        BoardMapTO mapTO = new BoardMapTO();
+        mapTO.setUserMaps(userMaps);
 
-        ArrayList<BoardTO> boardLists = new ArrayList<>();
-        boardLists.add(to1);
-        boardLists.add(to2);
-
-        BoardListTO listTO = new BoardListTO();
-        listTO.setBoardLists(boardLists);
-        */
-
-        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext( "classpath:context2.xml" );
-
-        BoardListTO listTO = (BoardListTO) ctx.getBean("listTO");
-
-        for ( String user : listTO.getUserLists() ) {
-            System.out.println( user );
+        for ( String value : mapTO.getUserMaps().values() ) {
+            System.out.println(value);
         }
-
-        for ( BoardTO to : listTO.getBoardLists() ) {
-            System.out.println( to );
+         */
+        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:context3.xml");
+        BoardMapTO mapTO = (BoardMapTO) ctx.getBean("mapTO");
+        for ( String value : mapTO.getUserMaps().values() ) {
+            System.out.println(value);
         }
-
         ctx.close();
+
     }
 }

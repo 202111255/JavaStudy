@@ -1,12 +1,9 @@
-package org.example.di05;
+package org.example.lifecycle;
 
-import org.example.di04.BoardListTO;
-import org.example.di04.BoardTO;
+import org.example.di05.BoardMapTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.GenericXmlApplicationContext;
-
-import java.util.HashMap;
 
 @SpringBootApplication
 public class Di04Application {
@@ -14,23 +11,10 @@ public class Di04Application {
     public static void main(String[] args) {
         SpringApplication.run(Di04Application.class, args);
 
-        /*
-        HashMap<String, String> userMaps = new HashMap<>();
-        userMaps.put("1", "제목1");
-        userMaps.put("2", "제목2");
+        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:lifecycle.xml");
 
-        BoardMapTO mapTO = new BoardMapTO();
-        mapTO.setUserMaps(userMaps);
-
-        for ( String value : mapTO.getUserMaps().values() ) {
-            System.out.println(value);
-        }
-         */
-        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:context3.xml");
-        BoardMapTO mapTO = (BoardMapTO) ctx.getBean("mapTO");
-        for ( String value : mapTO.getUserMaps().values() ) {
-            System.out.println(value);
-        }
+        Action action = (Action) ctx.getBean("writeAction");
+        action.execute();
         ctx.close();
 
     }
