@@ -1,17 +1,19 @@
-<%@ page import="java.sql.PreparedStatement" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@include file="import.jsp"%>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.naming.NamingException" %>
+
+<%@ page import="javax.sql.DataSource" %>
+
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
 
 <%
-	//seq 가져오기
-	String seq = request.getParameter("seq");
-
-
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	String seq = request.getParameter( "seq" );
 
 	String subject = "";
 	String writer = "";
@@ -21,58 +23,52 @@
 	String hit = "";
 	String content = "";
 
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 
 	try {
-
 		Context initCtx = new InitialContext();
 		Context envCtx = (Context) initCtx.lookup("java:comp/env");
 		DataSource dataSource = (DataSource) envCtx.lookup("jdbc/mariadb1");
 
-
 		conn = dataSource.getConnection();
 
-		//조회수 증가
-		String sql = "update board1 set hit = hit+1 where seq=?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, seq);
+		// 조회수 증가
+		String sql = "update board1 set hit=hit+1 where seq=?";
+		pstmt = conn.prepareStatement( sql );
+		pstmt.setString( 1, seq );
 
 		pstmt.executeUpdate();
 
-
-		//절대 비밀번호를 같이 가져오면 안됨
-		sql = "select subject, writer, mail, wip, wdate, hit, content from board1 where seq = ? order by seq desc";
-
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, seq);
+		// 자세히 보기 데이터를 select
+		sql = "select subject, writer, mail, wip, wdate, hit, content from board1 where seq=?";
+		pstmt = conn.prepareStatement( sql );
+		pstmt.setString( 1, seq );
 
 		rs = pstmt.executeQuery();
 
-		//하나만 가져오면 되니까 if 걸어주기
-		if(rs.next()) {
-			subject = rs.getString("subject");
-			writer = rs.getString("writer");
-			mail = rs.getString("mail");
-			wip = rs.getString("wip");
-			wdate = rs.getString("wdate").replaceAll("-", "/");;
-			hit = rs.getString("hit");
-			content = rs.getString("content");
-
+		if ( rs.next() ) {
+			subject = rs.getString( "subject" );
+			writer = rs.getString( "writer" );
+			mail = rs.getString( "mail" );
+			wip = rs.getString( "wip" );
+			wdate = rs.getString( "wdate" );
+			hit = rs.getString( "hit" );
+			// 엔터키 -> <br />
+			content = rs.getString( "content" ).replaceAll( "\n", "<br />" );
 		}
 
-
-	} catch (SQLException e) {
-		System.out.println("에러 :"+ e.getMessage());
-	} catch (NamingException e) {
-		System.out.println("에러 :"+ e.getMessage());
+	} catch ( NamingException e ) {
+		System.out.println( "[에러] " + e.getMessage() );
+	} catch ( SQLException e ) {
+		System.out.println( "[에러] " + e.getMessage() );
+	} finally {
+		if ( rs != null ) rs.close();;
+		if ( pstmt != null ) pstmt.close();;
+		if ( conn != null ) conn.close();;
 	}
-	finally {
-		if (pstmt != null) { pstmt.close(); }
-		if (conn != null) { conn.close(); }
-		if (rs != null) { rs.close(); }
-	}
-
 %>
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -97,18 +93,18 @@
 			<table>
 			<tr>
 				<th width="10%">제목</th>
-				<td width="60%"><%=subject%></td>
+				<td width="60%"><%=subject %></td>
 				<th width="10%">등록일</th>
-				<td width="20%"><%=wdate%></td>
+				<td width="20%"><%=wdate %></td>
 			</tr>
 			<tr>
 				<th>글쓴이</th>
-				<td><%=writer%>(<%=mail%>)(<%=wip%>)</td>
+				<td><%=writer %>(<%=mail %>)(<%=wip %>)</td>
 				<th>조회</th>
-				<td><%=hit%></td>
+				<td><%=hit %></td>
 			</tr>
 			<tr>
-				<td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%"><%=content%></td>
+				<td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%"><%=content %></td>
 			</tr>
 			</table>
 		</div>
@@ -118,8 +114,8 @@
 				<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_list1.jsp'" />
 			</div>
 			<div class="align_right">
-				<input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_modify1.jsp?seq=<%=seq%>'" />
-				<input type="button" value="삭제" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_delete1.jsp?seq=<%=seq%>'" />
+				<input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_modify1.jsp?seq=<%=seq %>'" />
+				<input type="button" value="삭제" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_delete1.jsp?seq=<%=seq %>'" />
 				<input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='board_write1.jsp'" />
 			</div>
 		</div>	
