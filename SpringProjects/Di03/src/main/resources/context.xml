@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="helloBean1" class="org.example.model.HelloBean" />
+    <bean id="helloBean2" class="org.example.model.HelloBean">
+            <constructor-arg>
+                <value>박문수</value>
+            </constructor-arg>
+    </bean>
+    <bean id="helloBean3" class="org.example.model.HelloBean">
+        <constructor-arg>
+            <value>길동</value>
+        </constructor-arg>
+        <constructor-arg>
+            <value>홍</value>
+        </constructor-arg>
+    </bean>
+
+
+<!--    생성자로 객체 전달    -->
+    <bean id="writeAction1" class="org.example.model2.WriteAction" />
+    <bean id="to" class="org.example.model2.BoardTO"/>
+    <bean id="writeAction2" class="org.example.model2.WriteAction">
+        <constructor-arg>
+            <ref bean="to"/>
+        </constructor-arg>
+    </bean>
+</beans>

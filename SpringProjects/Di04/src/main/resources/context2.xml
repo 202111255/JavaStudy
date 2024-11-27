@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="to1" class="org.example.di04.BoardTO">
+        <property name="seq" value="1"/>
+        <property name="subject" value="제목1"/>
+    </bean>
+    <bean id="to2" class="org.example.di04.BoardTO">
+        <property name="seq" value="2"/>
+        <property name="subject" value="제목2"/>
+    </bean>
+
+
+    <bean id="listTO" class="org.example.di04.BoardListTO">
+        <property name="userLists">
+            <list>
+                <value>홍길동</value>
+                <value>박문수</value>
+            </list>
+        </property>
+        <property name="boardLists">
+            <list>
+                <ref bean="to1"/>
+                <ref bean="to2"/>
+            </list>
+        </property>
+
+    </bean>
+
+</beans>

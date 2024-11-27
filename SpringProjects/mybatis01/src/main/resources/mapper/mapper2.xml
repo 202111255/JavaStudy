@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mybatis01">
+    <!--    mapper2.xml    -->
+    <select id="selectone" resultType="org.example.mybatis01.model.DeptTO">
+        select deptno, dname, loc
+        from dept
+        where deptno = 10
+    </select>
+
+    <select id="selectlist1" resultType="org.example.mybatis01.model.DeptTO">
+        select deptno, dname, loc
+        from dept
+    </select>
+
+    <select id="selectlist2" parameterType="String" resultType="org.example.mybatis01.model.EmpTO">
+        select empno, ename, job, deptno
+        from emp
+        where deptno = #{deptno}
+    </select>
+
+    <select id="selectlist3" parameterType="String" resultType="org.example.mybatis01.model.EmpTO">
+        select empno, ename, job, deptno
+        from emp
+        where ename like #{ename}
+    </select>
+
+    <select id="selectlist4" parameterType="org.example.mybatis01.model.EmpTO" resultType="org.example.mybatis01.model.EmpTO">
+        select empno, ename, job, deptno
+        from emp
+        where job=#{job} and deptno=#{deptno}
+    </select>
+
+
+</mapper>

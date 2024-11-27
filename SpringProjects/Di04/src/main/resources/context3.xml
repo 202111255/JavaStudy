@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="mapTO" class="org.example.di05.BoardMapTO">
+        <property name="userMaps">
+            <map>
+                <entry key="1">
+                    <value>제목 1</value>
+                </entry>
+                <entry key="2">
+                    <value>제목 2</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+</beans>
