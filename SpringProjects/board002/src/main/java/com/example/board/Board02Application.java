@@ -1,16 +1,13 @@
-package com.example.springbootdeveploper;
+package com.example.board;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootDeveploperApplication {
+public class Board02Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootDeveploperApplication.class, args);
+        SpringApplication.run(Board02Application.class, args);
     }
-
-
-
 
 }
